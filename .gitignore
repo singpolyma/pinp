@@ -1,0 +1,6 @@
+lex.yy.c
+*.o
+pinp
+y.tab.h
+y.tab.c
+y.output

@@ -1,0 +1,6 @@
+open [2] if [2]
+foreach(<>) {
+	/$[1]/
+	puts if
+}
+close

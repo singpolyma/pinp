@@ -1,0 +1,12 @@
+foreach {
+	open
+	foreach(<>) {
+		/ /
+		views[[6]] ++
+	}
+	close
+}
+
+foreach((keys_by_value views)[0..20]) {
+	print $_, " ", views[$_], "\n"
+}

@@ -1,0 +1,30 @@
+IGNORE_PREFIXES = ["/wordpress/wp-"]
+BOT_IDS = ["http://www.google.com/bot.html"]
+PAGE_NAMES = {}
+
+foreach {
+	open
+outer:
+	foreach(<>) {
+		$page = (/ /) [6]
+		foreach(IGNORE_PREFIXES) {
+			next outer if $page =~ /^\Q$_/
+		}
+		/"/
+		foreach(BOT_IDS) {
+			next outer if [5] =~ /\Q$_/
+		}
+		views[$page] ++
+
+		referrers[$page][[3]] ++
+	}
+	close
+}
+
+foreach((keys_by_value views)[0..20]) {
+	printf "%-8s%s %s\n", views[$_], $_, PAGE_NAMES[$_]
+	r = referrers[$_]
+	foreach((keys_by_value r)[0..20]) {
+		printf "    %-8s%s\n", r[$_], $_
+	}
+}
