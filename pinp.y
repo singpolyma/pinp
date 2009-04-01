@@ -17,7 +17,7 @@ LINE   : EXPR ';' LINE
        | /* nothing */
        ;
 EXPR   : NAME ARGS BLOCK
-       | '{' NAME ARGS BLOCK '}' NAME ARGS BLOCK /* XXX */
+       | '{' NAME ARGS BLOCK '}' NAME ARGS BLOCK /* XXX: I'd like to find a way to get rid of the {}... may require context-sensitive parsing */
        | NAME OP EXPR
        | '(' EXPR ')'
        | VALUE
@@ -26,7 +26,7 @@ BLOCK  : '{' LINE '}'
        | /* nothing */
        ;
 ARGS   : '(' EARGS ')'
-       | AARGS /* XXX */
+       | AARGS /* XXX: Currently causing a conflict.  See y.output for more information. */
        ;
 AARGS  : ARG ',' AARGS
        | ARG
